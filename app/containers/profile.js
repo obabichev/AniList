@@ -15,6 +15,8 @@ class Profile extends Component {
         return (
             <View style={styles.container}>
                 <Text>Profile!</Text>
+                <Text>{this.props.user.id}</Text>
+                <Text>{this.props.user.login}</Text>
             </View>
         );
     }
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    user: state.user,
+    user: state.auth.user,
 });
 
 export default connect(mapStateToProps)(Profile);

@@ -1,13 +1,12 @@
 'use strict';
 
 import {authRequest} from '../network/auth';
+import {openProfileScreen} from './router';
 
-export const auth = (user) => ({
+const auth = (user) => ({
     type: 'AUTH',
     user: user
 });
-
-
 
 export const login = (user) => {
     return (dispatch) => {
@@ -18,6 +17,7 @@ export const login = (user) => {
                     ...user,
                     id: result.user.id
                 }));
+                dispatch(openProfileScreen());
 
                 //todo change screen
                 // dispatch();

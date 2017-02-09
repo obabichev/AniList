@@ -5,7 +5,7 @@ import React, {Component, Navigator, PropTypes} from 'react';
 
 import {connect} from 'react-redux';
 
-import {openProfileScreen} from '../actions/router';
+import {login} from '../actions/auth';
 
 class Launch extends Component {
 
@@ -52,7 +52,7 @@ class Launch extends Component {
 
 
     loginOnClick = () => {
-        this.props.openProfileScreen();
+        this.props.login(this.state.user);
     }
 }
 
@@ -75,10 +75,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        openProfileScreen: () => {
-            dispatch(openProfileScreen())
-        }
-    }
+        login: user => dispatch(login(user))
+}
 };
 
 export default connect(undefined, mapDispatchToProps)(Launch);
