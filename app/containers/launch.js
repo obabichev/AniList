@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        login: user => dispatch(login(user))
-}
+        login: user => dispatch(login(user)),
+    };
 };
 
 export default connect(undefined, mapDispatchToProps)(Launch);

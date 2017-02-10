@@ -18,9 +18,6 @@ export const login = (user) => {
                     id: result.user.id
                 }));
                 dispatch(openProfileScreen());
-
-                //todo change screen
-                // dispatch();
             },
             error => console.log('Error:' + error.message)
         );

@@ -1,8 +1,10 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Button} from 'react-native';
 import {connect} from 'react-redux';
+import {openAnimeListScreen} from '../actions/router';
+
 
 class Profile extends Component {
 
@@ -17,6 +19,8 @@ class Profile extends Component {
                 <Text>Profile!</Text>
                 <Text>{this.props.user.id}</Text>
                 <Text>{this.props.user.login}</Text>
+
+                <Button title="Anime list" onPress={this.props.openAnimeListScreen}/>
             </View>
         );
     }
@@ -34,4 +38,10 @@ const mapStateToProps = state => ({
     user: state.auth.user,
 });
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = (dispatch) => {
+    return {
+        openAnimeListScreen: () => dispatch(openAnimeListScreen())
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

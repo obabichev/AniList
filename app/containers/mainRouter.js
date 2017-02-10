@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 
 import Launch from './launch';
 import Profile from './profile';
+import AnimeList from './AnimeList';
 
 class MainRouter extends Component {
     render() {
@@ -14,6 +15,8 @@ class MainRouter extends Component {
                 return <Launch/>;
             case 'PROFILE':
                 return <Profile/>;
+            case 'ANIME_LIST':
+                return <AnimeList/>;
             default:
                 return null;
         }
