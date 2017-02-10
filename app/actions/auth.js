@@ -3,8 +3,10 @@
 import {authRequest} from '../network/auth';
 import {openProfileScreen} from './router';
 
+import {AUTH} from '../constatns/auth';
+
 const auth = (user) => ({
-    type: 'AUTH',
+    type: AUTH,
     user: user
 });
 
@@ -12,7 +14,6 @@ export const login = (user) => {
     return (dispatch) => {
         authRequest(user).then(
             result => {
-                console.log('result: ' + JSON.stringify(result));
                 dispatch(auth({
                     ...user,
                     id: result.user.id

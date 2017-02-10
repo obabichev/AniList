@@ -13,7 +13,6 @@ class Profile extends Component {
     }
 
     render() {
-        console.log("Profile: render: user: " + JSON.stringify(this.props.user));
         return (
             <View style={styles.container}>
                 <Text>Profile!</Text>

@@ -3,13 +3,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import Launch from './launch';
-import Profile from './profile';
+import Launch from './Launch';
+import Profile from './Profile';
 import AnimeList from './AnimeList';
 
 class MainRouter extends Component {
     render() {
-        console.log("Rerender mainRouter: " + this.props.route);
         switch (this.props.route) {
             case 'LAUNCH':
                 return <Launch/>;

@@ -1,9 +1,10 @@
 'use strict';
 
+import {AUTH} from '../constatns/auth';
+
 const auth = (state = {}, action) => {
     switch (action.type) {
-        case 'AUTH':
-            console.log(`AUTH REDUCER state:${JSON.stringify(state)} action:${JSON.stringify(action)}`);
+        case AUTH:
             return {
                 ...state,
                 user: action.user

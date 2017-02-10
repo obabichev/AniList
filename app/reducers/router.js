@@ -7,7 +7,6 @@ const initialRoute = {
 };
 
 const router = (state = initialRoute, action) => {
-    console.log(`ROUTER REDUCER state:${JSON.stringify(initialRoute)} action:${JSON.stringify(action)}`);
     switch (action.type) {
         case OPEN_PROFILE_SCREEN:
             return {
