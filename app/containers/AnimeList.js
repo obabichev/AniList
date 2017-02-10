@@ -13,16 +13,29 @@ class AnimeList extends Component {
     }
 
     componentDidMount() {
-        this.props.showAnimeList();
+        this.props.showAnimeList(this.props.user);
     }
 
     animeList = (animeList) => animeList.map(anime => <Text key={anime.series_title}>{anime.series_title}</Text>);
 
+    header = myinfo => {
+        if (myinfo) return <View>
+            <Text>Watching: {myinfo.user_watching}</Text>
+            <Text>Completed: {myinfo.user_completed}</Text>
+            <Text>Onhold: {myinfo.user_onhold}</Text>
+            <Text>Dropped: {myinfo.user_dropped}</Text>
+            <Text>Plan to watch: {myinfo.user_plantowatch}</Text>
+            <Text>Days spent watching: {myinfo.user_days_spent_watching}</Text>
+        </View>;
+    };
+
     render() {
+        console.log("render anime list: " + JSON.stringify(this.props.animeList));
         return (
             <View style={styles.container}>
-                <Text>Anime list!</Text>
-                {this.animeList(this.props.animeList)}
+                {this.header(this.props.animeList.myinfo)}
+                <View style={{height:30}}/>
+                {this.animeList(this.props.animeList.anime)}
             </View>
         );
     }
@@ -31,17 +44,19 @@ class AnimeList extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        margin: 20,
+        // alignItems: 'center',
+        // justifyContent: 'center'
     }
 });
 
 const mapStateToProps = state => ({
+    user: state.auth.user,
     animeList: state.anime.animeList
 });
 
 const mapDispatchToProps = dispatch => ({
-    showAnimeList: () => dispatch(showAnimeList())
+    showAnimeList: (user) => dispatch(showAnimeList(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnimeList);

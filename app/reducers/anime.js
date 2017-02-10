@@ -3,7 +3,9 @@
 import {SHOW_ANIME_LIST} from '../constatns/anime';
 
 const initialRoute = {
-    animeList: []
+    animeList: {
+        anime:[]
+    }
 };
 
 const anime = (state = initialRoute, action) => {
