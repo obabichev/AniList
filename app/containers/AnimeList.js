@@ -5,6 +5,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 
 import {showAnimeList} from '../actions/anime';
+import AnimeListView from '../components/AnimeListView'
 
 class AnimeList extends Component {
 
@@ -30,12 +31,11 @@ class AnimeList extends Component {
     };
 
     render() {
-        console.log("render anime list: " + JSON.stringify(this.props.animeList));
         return (
             <View style={styles.container}>
                 {this.header(this.props.animeList.myinfo)}
                 <View style={{height:30}}/>
-                {this.animeList(this.props.animeList.anime)}
+                <AnimeListView anime={this.props.animeList.anime}/>
             </View>
         );
     }
@@ -45,8 +45,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         margin: 20,
-        // alignItems: 'center',
-        // justifyContent: 'center'
     }
 });
 
