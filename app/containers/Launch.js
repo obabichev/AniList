@@ -27,7 +27,8 @@ class Launch extends Component {
                            value={this.state.user.login}
                            onChangeText={this.setLogin}
                 />
-                <TextInput style={styles.input}
+                <TextInput secureTextEntry={true}
+                           style={styles.input}
                            value={this.state.user.password}
                            onChangeText={this.setPassword}
                 />

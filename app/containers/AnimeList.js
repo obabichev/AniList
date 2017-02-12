@@ -3,6 +3,8 @@
 import React, {Component, PropTypes} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon } from 'native-base';
+
 
 import {showAnimeList} from '../actions/anime';
 import AnimeListView from '../components/AnimeListView'
@@ -32,11 +34,25 @@ class AnimeList extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                {this.header(this.props.animeList.myinfo)}
-                <View style={{height:30}}/>
-                <AnimeListView anime={this.props.animeList.anime}/>
-            </View>
+            <Container>
+                <Header>
+                    <Left>
+                        <Button transparent>
+                            <Icon name='menu' />
+                        </Button>
+                    </Left>
+                    <Body>
+                    <Title>Anime list</Title>
+                    </Body>
+                    <Right />
+                </Header>
+
+                <Content>
+                    {this.header(this.props.animeList.myinfo)}
+                    <View style={{height:30}}/>
+                    <AnimeListView anime={this.props.animeList.anime}/>
+                </Content>
+            </Container>
         );
     }
 }

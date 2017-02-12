@@ -1,0 +1,58 @@
+{
+  "myanimelist": {
+    "myinfo": {
+      "user_id": "6015782",
+      "user_name": "obabichev",
+      "user_watching": "2",
+      "user_completed": "0",
+      "user_onhold": "0",
+      "user_dropped": "0",
+      "user_plantowatch": "0",
+      "user_days_spent_watching": "0.18"
+    },
+    "anime": [
+      {
+        "series_animedb_id": "1575",
+        "series_title": "Code Geass: Hangyaku no Lelouch",
+        "series_synonyms": "Code Geass: Hangyaku no Lelouch; Code Geass: Lelouch of the Rebellion",
+        "series_type": "1",
+        "series_episodes": "25",
+        "series_status": "2",
+        "series_start": "2006-10-06",
+        "series_end": "2007-07-29",
+        "series_image": "https://myanimelist.cdn-dena.com/images/anime/5/50331.jpg",
+        "my_id": "0",
+        "my_watched_episodes": "11",
+        "my_start_date": "0000-00-00",
+        "my_finish_date": "0000-00-00",
+        "my_score": "7",
+        "my_status": "1",
+        "my_rewatching": "0",
+        "my_rewatching_ep": "0",
+        "my_last_updated": "1485872925",
+        "my_tags": "test tag, 2nd tag"
+      },
+      {
+        "series_animedb_id": "32949",
+        "series_title": "Kuzu no Honkai",
+        "series_synonyms": "; Scum's Wish",
+        "series_type": "1",
+        "series_episodes": "12",
+        "series_status": "1",
+        "series_start": "2017-01-13",
+        "series_end": "2017-03-31",
+        "series_image": "https://myanimelist.cdn-dena.com/images/anime/5/83937.jpg",
+        "my_id": "0",
+        "my_watched_episodes": "0",
+        "my_start_date": "0000-00-00",
+        "my_finish_date": "0000-00-00",
+        "my_score": "0",
+        "my_status": "1",
+        "my_rewatching": "0",
+        "my_rewatching_ep": "0",
+        "my_last_updated": "1485871318",
+        "my_tags": ""
+      }
+    ]
+  }
+}
