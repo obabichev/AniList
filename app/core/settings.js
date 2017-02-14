@@ -1,7 +1,7 @@
 'use strict';
 
 export const client = {
-    clientId: '',
+    clientId: 'asdf',
     clientSecret: '',
     redirectUri: ''
 };
