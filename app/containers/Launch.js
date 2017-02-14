@@ -3,6 +3,8 @@
 import {Text, View, TextInput, Button, StyleSheet, Linking} from 'react-native';
 import React, {Component, Navigator, PropTypes} from 'react';
 
+import TokenStorage from '../core/preferences/token';
+
 import {connect} from 'react-redux';
 
 import {login} from '../actions/auth';
@@ -23,7 +25,7 @@ function anilistOauth(app_key) {
 
 }
 
-function handleUrl (event) {
+function handleUrl(event) {
     console.log(`Success auth ${event.url}`);
 
     Linking.removeEventListener('url', handleUrl);
@@ -45,9 +47,13 @@ class Launch extends Component {
 
     componentDidMount() {
         // anilistOauth(config.app_key);
+        TokenStorage.isAuthorized().then(
+            res => res ? '//todo' : anilistOauth(config.app_key)
+        );
     }
 
     render() {
+        return <View></View>;
         return (
             <View style={styles.container}>
                 <TextInput style={styles.input}
