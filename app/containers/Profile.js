@@ -3,6 +3,7 @@
 import React, {Component, PropTypes} from 'react';
 import {View, Text, StyleSheet, Button} from 'react-native';
 import {connect} from 'react-redux';
+
 import {openAnimeListScreen} from '../actions/router';
 
 
@@ -16,8 +17,7 @@ class Profile extends Component {
         return (
             <View style={styles.container}>
                 <Text>Profile!</Text>
-                <Text>{this.props.user.id}</Text>
-                <Text>{this.props.user.login}</Text>
+                <Text>{this.props.token}</Text>
 
                 <Button title="Anime list" onPress={this.props.openAnimeListScreen}/>
             </View>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    user: state.auth.user,
+    token: state.auth.tokens.access_token
 });
 
 const mapDispatchToProps = (dispatch) => {

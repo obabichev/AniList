@@ -5,22 +5,22 @@ import {openProfileScreen} from './router';
 
 import {AUTH} from '../constatns/auth';
 
-const auth = (user) => ({
+export const auth = (tokens) => ({
     type: AUTH,
-    user: user
+    tokens: tokens
 });
 
-export const login = (user) => {
-    return (dispatch) => {
-        authRequest(user).then(
-            result => {
-                dispatch(auth({
-                    ...user,
-                    id: result.user.id
-                }));
-                dispatch(openProfileScreen());
-            },
-            error => console.log('Error:' + error.message)
-        );
-    };
-};
+// export const login = (user) => {
+//     return (dispatch) => {
+//         authRequest(user).then(
+//             result => {
+//                 dispatch(auth({
+//                     ...user,
+//                     id: result.user.id
+//                 }));
+//                 dispatch(openProfileScreen());
+//             },
+//             error => console.log('Error:' + error.message)
+//         );
+//     };
+// };
