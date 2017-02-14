@@ -1,11 +1,34 @@
 'use strict';
 
-import {Text, View, TextInput, Button, StyleSheet} from 'react-native';
+import {Text, View, TextInput, Button, StyleSheet, Linking} from 'react-native';
 import React, {Component, Navigator, PropTypes} from 'react';
 
 import {connect} from 'react-redux';
 
 import {login} from '../actions/auth';
+const config = require('../network/config');
+
+
+function anilistOauth(app_key) {
+    let url = [
+        `https://anilist.co/api/auth/authorize`,
+        `?grant_type=authorization_code`,
+        `&response_type=code`,
+        `&client_id=` + app_key,
+        `&redirect_uri=oauth2example://foo`
+    ].join(``);
+    console.log(`login url: ${url}`);
+    Linking.openURL(url);
+    Linking.addEventListener(`url`, handleUrl);
+
+}
+
+function handleUrl (event) {
+    console.log(`Success auth ${event.url}`);
+
+    Linking.removeEventListener('url', handleUrl);
+}
+
 
 class Launch extends Component {
 
@@ -18,6 +41,10 @@ class Launch extends Component {
                 password: ''
             }
         };
+    }
+
+    componentDidMount() {
+        // anilistOauth(config.app_key);
     }
 
     render() {
@@ -53,7 +80,8 @@ class Launch extends Component {
 
 
     loginOnClick = () => {
-        this.props.login(this.state.user);
+        anilistOauth(config.app_key);
+        // this.props.login(this.state.user);
     }
 }
 

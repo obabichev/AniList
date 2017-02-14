@@ -26,3 +26,4 @@ export const authRequest = async(user) => {
     let resultJson = x2js.xml2js(resultXml);
     return resultJson;
 };
+

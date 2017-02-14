@@ -86,5 +86,16 @@
       <string>Times New Roman.ttf</string>
       <string>Zocial.ttf</string>
     </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>oauth2example</string>
+        </array>
+      </dict>
+    </array>
   </dict>
 </plist>
