@@ -9,6 +9,12 @@ import {persistStore, autoRehydrate} from 'redux-persist'
 
 import MainRouter from './MainRouter';
 import reducer from '../reducers/index';
+import {openLaunchScreen} from '../actions/router';
+
+const persistingOptions = {
+    storage: AsyncStorage,
+    whitelist: ['auth']
+};
 
 const store = createStore(
     reducer,
@@ -18,41 +24,13 @@ const store = createStore(
     )
 );
 
+persistStore(store, persistingOptions, () => store.dispatch(openLaunchScreen()));
 
 export default class App extends Component {
-
-    constructor(props) {
-        super(props);
-
-        // TokenStorage.getTokens().then(
-        //     tokens => console.log(`Tokens on start app: ${JSON.stringify(tokens)}`)
-        // );
-
-        persistStore(store,
-            {
-                storage: AsyncStorage,
-                whitelist: ['auth']
-            },
-            () => {
-                console.log("Restoring ended");
-                this.showRouter();
-            }
-        );
-
-        this.state = {
-            routing: false
-        };
-    }
-
-    showRouter = () => this.setState({routing: true});
-
-    drawContent = () => this.state.routing ? <MainRouter/> : <View/>;
-
     render() {
         return (
             <Provider store={store}>
-                {/*<MainRouter/>*/}
-                {this.drawContent()}
+                <MainRouter/>
             </Provider>
         );
     }

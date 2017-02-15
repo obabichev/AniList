@@ -1,8 +1,7 @@
 'use strict';
 
-import {authRequest} from '../network/auth';
 import {openProfileScreen} from './router';
-
+import {authorize, accessToken} from '../core/network/auth';
 import {AUTH} from '../constatns/auth';
 
 export const auth = (tokens) => ({
@@ -10,17 +9,27 @@ export const auth = (tokens) => ({
     tokens: tokens
 });
 
-// export const login = (user) => {
-//     return (dispatch) => {
-//         authRequest(user).then(
-//             result => {
-//                 dispatch(auth({
-//                     ...user,
-//                     id: result.user.id
-//                 }));
-//                 dispatch(openProfileScreen());
-//             },
-//             error => console.log('Error:' + error.message)
-//         );
-//     };
-// };
+export const login = accessToken => {
+    return dispatch => {
+        if (!accessToken) {
+            getTokens().then(
+                tokens => {
+                    dispatch(auth(tokens));
+                    dispatch(openProfileScreen())
+                }
+            );
+        } else {
+            dispatch(openProfileScreen());
+        }
+    };
+};
+
+async function getTokens() {
+    let code = await authorize();
+    let tokens = await accessToken(code);
+    return {
+        code: code,
+        access_token: tokens.access_token,
+        refresh_token: tokens.refresh_token
+    }
+}

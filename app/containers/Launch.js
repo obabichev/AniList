@@ -4,11 +4,7 @@ import {Text, View, TextInput, Button, StyleSheet, Linking} from 'react-native';
 import React, {Component, Navigator, PropTypes} from 'react';
 
 import {connect} from 'react-redux';
-
-import {authorize, accessToken} from '../core/network/auth';
-
-import {auth} from '../actions/auth';
-import {openProfileScreen} from '../actions/router';
+import {login} from '../actions/auth'
 
 
 class Launch extends Component {
@@ -17,25 +13,8 @@ class Launch extends Component {
         super(props);
     }
 
-    login = async() => {
-        console.log(`try login: ${JSON.stringify(this.props.tokens)}`);
-        if (!this.props.tokens.access_token) {
-            let code = await authorize();
-            console.log("CODE: " + code);
-            let tokens = await accessToken(code);
-            console.log(`TOKENS: ${JSON.stringify(tokens)}`);
-
-            this.props.auth({
-                code: code,
-                access_token: tokens.access_token,
-                refresh_token: tokens.refresh_token
-            });
-        }
-        this.props.openProfileScreen();
-    };
-
     componentDidMount() {
-        this.login().then();
+        this.props.login(this.props.accessToken);
     }
 
     render() {
@@ -44,12 +23,11 @@ class Launch extends Component {
 }
 
 const mapStateToProps = state => ({
-    tokens: state.auth.tokens
+    accessToken: state.auth.tokens.access_token
 });
 const mapDispatchToProps = dispatch => {
     return {
-        auth: tokens => dispatch(auth(tokens)),
-        openProfileScreen: () => dispatch(openProfileScreen())
+        login: accessToken => dispatch(login(accessToken))
     };
 };
 
