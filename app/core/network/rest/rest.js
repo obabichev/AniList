@@ -6,7 +6,6 @@ export async function get(path) {
         method: 'GET'
     });
 
-    console.log(`GET: ${path}, status:${result.status}`);
     return result.json();
 }
 

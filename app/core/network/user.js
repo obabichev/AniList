@@ -13,10 +13,3 @@ export async function fetchUser(accessToken) {
     return result;
 }
 
-export async function accessToken(code) {
-    let accessTokenUrl = createAccessTokenUrl(code);
-
-    let result = await post(accessTokenUrl, null);
-    return result;
-}
-

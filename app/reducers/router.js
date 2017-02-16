@@ -8,7 +8,9 @@ const initialRoute = {
 };
 
 const router = (state = initialRoute, action) => {
-    console.log(`Switch to ${action.route}`);
+    if (action.route) {
+        console.log(`Switch to ${action.route}`);
+    }
     switch (action.type) {
         case OPEN_LAUNCH_SCREEN:
             return {
