@@ -5,6 +5,7 @@ import {client} from '../settings/settings';
 import {get, post} from './rest/rest';
 
 const DOMEN = 'https://anilist.co/api';
+import {concatWithBaseUrl} from './rest/rest';
 
 function authorizeViaWebForm(url, callback) {
     let handler = event => {
@@ -22,7 +23,7 @@ const authParams = () => [
     `redirect_uri=${client.redirectUri}`
 ];
 
-const createAuthUrl = () => `${DOMEN}/auth/authorize?${authParams().join('&')}`;
+const createAuthUrl = () => concatWithBaseUrl(`/auth/authorize?${authParams().join('&')}`);
 const codeFromRedirectPath = path => path.replace(`${client.redirectUri}?code=`, '');
 
 export async function authorize() {
@@ -41,7 +42,7 @@ const accessTokenParams = code => [
     `code=${code}`
 ];
 
-const createAccessTokenUrl = code => `${DOMEN}/auth/access_token?${accessTokenParams(code).join('&')}`;
+const createAccessTokenUrl = code => concatWithBaseUrl(`/auth/access_token?${accessTokenParams(code).join('&')}`);
 
 export async function accessToken(code) {
     let accessTokenUrl = createAccessTokenUrl(code);

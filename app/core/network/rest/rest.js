@@ -1,5 +1,9 @@
 'use strict';
 
+const BASE_URL = 'https://anilist.co/api';
+
+export const concatWithBaseUrl = str => `${BASE_URL}${str}`;
+
 export async function get(path) {
 
     let result = await fetch(path, {
@@ -17,7 +21,7 @@ export async function post(path, body) {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
-        body: body?JSON.stringify(body):null
+        body: body ? JSON.stringify(body) : null
     });
 
     console.log(`POST: ${path}, status:${result.status}`);

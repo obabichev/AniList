@@ -5,6 +5,7 @@ import {View, Text, StyleSheet, Button} from 'react-native';
 import {connect} from 'react-redux';
 
 import {openAnimeListScreen} from '../actions/router';
+import {fetchUserData} from '../actions/user';
 
 
 class Profile extends Component {
@@ -13,13 +14,30 @@ class Profile extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        if (!this.props.user.id){
+            this.props.fetchUserData(this.props.token);
+        }
+    }
+
+    renderProfile = () => {
+        if (this.props.user.id) {
+            return this.showProfile();
+        }
+    };
+
+    showProfile = () => (
+        <Text>ID:{this.props.user.id}</Text>
+    );
+
     render() {
         return (
             <View style={styles.container}>
+                {this.renderProfile()}
                 <Text>Profile!</Text>
                 <Text>{this.props.token}</Text>
 
-                <Button title="Anime list" onPress={this.props.openAnimeListScreen}/>
+                <Button title="Anime list!" onPress={this.props.openAnimeListScreen}/>
             </View>
         );
     }
@@ -34,12 +52,14 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    token: state.auth.tokens.access_token
+    token: state.auth.tokens.access_token,
+    user: state.user.user
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        openAnimeListScreen: () => dispatch(openAnimeListScreen())
+        openAnimeListScreen: () => dispatch(openAnimeListScreen()),
+        fetchUserData: token => dispatch(fetchUserData(token))
     };
 };
 

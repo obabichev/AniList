@@ -1,0 +1,91 @@
+{
+  "id": 87666,
+  "display_name": "obabichev",
+  "anime_time": 0,
+  "manga_chap": 0,
+  "about": "",
+  "list_order": 0,
+  "adult_content": false,
+  "forum_homepage": 0,
+  "legacy_lists": false,
+  "donator": 0,
+  "following": false,
+  "image_url_lge": "https://cdn.anilist.co/img/dir/user/reg/default.png",
+  "image_url_med": "https://cdn.anilist.co/img/dir/user/sml/default.png",
+  "image_url_banner": "https://cdn.anilist.co/img/dir/userbanner/",
+  "title_language": "english",
+  "score_type": 0,
+  "custom_list_anime": [],
+  "custom_list_manga": [],
+  "stats": {
+    "status_distribution": {
+      "anime": {
+        "watching": 0,
+        "plan to watch": 0,
+        "completed": 1,
+        "dropped": 0,
+        "on-hold": 0
+      },
+      "manga": {
+        "reading": 0,
+        "plan to read": 0,
+        "completed": 0,
+        "dropped": 0,
+        "on-hold": 0
+      }
+    },
+    "score_distribution": {
+      "anime": {
+        "10": 0,
+        "20": 0,
+        "30": 0,
+        "40": 0,
+        "50": 0,
+        "60": 0,
+        "70": 0,
+        "80": 0,
+        "90": 0,
+        "100": 0,
+        "260": 1
+      },
+      "manga": {
+        "10": 0,
+        "20": 0,
+        "30": 0,
+        "40": 0,
+        "50": 0,
+        "60": 0,
+        "70": 0,
+        "80": 0,
+        "90": 0,
+        "100": 0
+      }
+    },
+    "favourite_genres": {
+      "Sci-Fi": 1,
+      "Mecha": 1,
+      "Action": 1
+    },
+    "activity_history": {
+      "2017-02-13": {
+        "count": 1,
+        "color": "#d6e685"
+      }
+    },
+    "activity_history_total": 183,
+    "list_scores": {
+      "anime": {
+        "mean": 0,
+        "standard_deviation": 0
+      },
+      "manga": {
+        "mean": 0,
+        "standard_deviation": 0
+      }
+    }
+  },
+  "advanced_rating": false,
+  "advanced_rating_names": [],
+  "notifications": 0,
+  "airing_notifications": 1
+}
