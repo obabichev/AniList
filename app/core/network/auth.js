@@ -2,10 +2,10 @@
 
 import {Linking} from 'react-native';
 import {client} from '../settings/settings';
-import {get, post} from './rest/rest';
+import {post} from './rest/rest';
 
-const DOMEN = 'https://anilist.co/api';
-import {concatWithBaseUrl} from './rest/rest';
+
+import {genUrl} from './urlUtil';
 
 function authorizeViaWebForm(url, callback) {
     let handler = event => {
@@ -16,14 +16,14 @@ function authorizeViaWebForm(url, callback) {
     Linking.addEventListener(`url`, handler);
 }
 
-const authParams = () => [
-    'grant_type=authorization_code',
-    'response_type=code',
-    `client_id=${client.clientId}`,
-    `redirect_uri=${client.redirectUri}`
-];
+const authParams = () => ({
+    grant_type: 'authorization_code',
+    response_type: 'code',
+    client_id: client.clientId,
+    redirect_uri: client.redirectUri
+});
 
-const createAuthUrl = () => concatWithBaseUrl(`/auth/authorize?${authParams().join('&')}`);
+const createAuthUrl = () => genUrl('/auth/authorize', authParams());
 const codeFromRedirectPath = path => path.replace(`${client.redirectUri}?code=`, '');
 
 export async function authorize() {
@@ -34,15 +34,16 @@ export async function authorize() {
     });
 }
 
-const accessTokenParams = code => [
-    'grant_type=authorization_code',
-    `client_id=${client.clientId}`,
-    `client_secret=${client.clientSecret}`,
-    `redirect_uri=${client.redirectUri}`,
-    `code=${code}`
-];
+const accessTokenParams = code => ({
+    grant_type: 'authorization_code',
+    client_id: client.clientId,
+    client_secret: client.clientSecret,
+    redirect_uri: client.redirectUri,
+    code: code
+});
 
-const createAccessTokenUrl = code => concatWithBaseUrl(`/auth/access_token?${accessTokenParams(code).join('&')}`);
+
+const createAccessTokenUrl = code => genUrl('/auth/access_token', accessTokenParams(code));
 
 export async function accessToken(code) {
     let accessTokenUrl = createAccessTokenUrl(code);

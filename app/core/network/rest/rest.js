@@ -1,9 +1,5 @@
 'use strict';
 
-const BASE_URL = 'https://anilist.co/api';
-
-export const concatWithBaseUrl = str => `${BASE_URL}${str}`;
-
 export async function get(path) {
 
     let result = await fetch(path, {
