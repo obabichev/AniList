@@ -1,12 +1,27 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import {View, Text, Image, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
+import {
+    Container,
+    Header,
+    Title,
+    Content,
+    Footer,
+    FooterTab,
+    Button,
+    Left,
+    Right,
+    Body,
+    Icon,
+    Spinner
+} from 'native-base';
 
 import {openAnimeListScreen} from '../actions/router';
 import {fetchUserData} from '../actions/user';
 
+import ProfileHeaderView from '../components/profile/ProfileHeaderView';
 
 class Profile extends Component {
 
@@ -15,7 +30,7 @@ class Profile extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.user.id){
+        if (!this.props.user.id) {
             this.props.fetchUserData(this.props.token);
         }
     }
@@ -27,33 +42,59 @@ class Profile extends Component {
     };
 
     showProfile = () => (
-        <Text>ID:{this.props.user.id}</Text>
+        <Content>
+            <ProfileHeaderView
+                style={styles.header}
+                avatarImageUrl={this.props.user.image_url_lge}
+                username={this.props.user.display_name}
+            />
+            <Text>ID:{this.props.user.id}</Text>
+        </Content>
     );
 
-    render() {
-        return (
-            <View style={styles.container}>
-                {this.renderProfile()}
-                <Text>Profile!</Text>
-                <Text>{this.props.token}</Text>
+    showDownloadingSpinner = () => this.props.downloading ? (<Spinner color='blue'/>) : null;
 
-                <Button title="Anime list!" onPress={this.props.openAnimeListScreen}/>
-            </View>
+    render() {
+        console.log(`Pfofile: downloading: ${this.props.downloading}`);
+        return (
+            <Container>
+                <Header>
+                    <Left>
+                        <Button transparent>
+                            <Icon name='menu'/>
+                        </Button>
+                    </Left>
+                    <Body>
+                    <Title>Profile</Title>
+                    </Body>
+                    <Right />
+                </Header>
+                {this.showDownloadingSpinner()}
+                {this.renderProfile()}
+            </Container>
         );
     }
 }
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        width: 300,
+        height: 300,
+        // flex: 1,
+        // weight: 1,
+        // alignItems: 'center',
+        // justifyContent: 'center'
+    },
+    header: {
+        width: 100,
+        height: 400,
     }
 });
 
 const mapStateToProps = state => ({
     token: state.auth.tokens.access_token,
-    user: state.user.user
+    user: state.user.user,
+    downloading: state.router.downloading,
 });
 
 const mapDispatchToProps = (dispatch) => {

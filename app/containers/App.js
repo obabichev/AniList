@@ -13,7 +13,8 @@ import {openLaunchScreen} from '../actions/router';
 
 const persistingOptions = {
     storage: AsyncStorage,
-    whitelist: ['auth']
+    // whitelist: ['auth'],
+    whitelist: []
 };
 
 const store = createStore(

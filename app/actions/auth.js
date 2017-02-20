@@ -1,6 +1,6 @@
 'use strict';
 
-import {openProfileScreen} from './router';
+import {openProfileScreen, startDownloading, stopDownloading} from './router';
 import {authorize, accessToken} from '../core/network/auth';
 import {AUTH} from '../constatns/auth';
 
@@ -12,11 +12,14 @@ export const auth = (tokens) => ({
 export const login = accessToken => {
     return dispatch => {
         if (!accessToken) {
+            dispatch(startDownloading());
             getTokens().then(
                 tokens => {
+                    dispatch(stopDownloading());
                     dispatch(auth(tokens));
-                    dispatch(openProfileScreen())
-                }
+                    dispatch(openProfileScreen());
+                },
+                () => dispatch(stopDownloading())
             );
         } else {
             dispatch(openProfileScreen());

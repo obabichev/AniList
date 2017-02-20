@@ -1,11 +1,11 @@
 'use strict';
 
-import {Text, View, TextInput, Button, StyleSheet, Linking} from 'react-native';
 import React, {Component, Navigator, PropTypes} from 'react';
 
 import {connect} from 'react-redux';
 import {login} from '../actions/auth'
 
+import {Container, Content, Spinner} from 'native-base';
 
 class Launch extends Component {
 
@@ -18,12 +18,18 @@ class Launch extends Component {
     }
 
     render() {
-        return <View/>;
+        return (
+            <Container>
+                <Content>
+                    {this.props.downloading ? (<Spinner color='blue'/>) : null}
+                </Content>
+            </Container>);
     }
 }
 
 const mapStateToProps = state => ({
-    accessToken: state.auth.tokens.access_token
+    accessToken: state.auth.tokens.access_token,
+    downloading: state.router.downloading,
 });
 const mapDispatchToProps = dispatch => {
     return {

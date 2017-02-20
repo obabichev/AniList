@@ -10,6 +10,8 @@ const fetchUserInfoParams = accessToken => ({
 
 export async function fetchUser(accessToken) {
     let result = await get(genUrl('/user', fetchUserInfoParams(accessToken)));
+    console.log("User: " + JSON.stringify(result));
     return result;
 }
+
 

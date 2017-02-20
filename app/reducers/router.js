@@ -1,10 +1,17 @@
 'use strict';
 
-import {OPEN_LAUNCH_SCREEN, OPEN_PROFILE_SCREEN, OPEN_ANIME_LIST_SCREEN} from '../constatns/router';
+import {
+    OPEN_LAUNCH_SCREEN,
+    OPEN_PROFILE_SCREEN,
+    OPEN_ANIME_LIST_SCREEN,
+    START_DOWNLOADING,
+    STOP_DOWNLOADING
+} from '../constatns/router';
 import {SPLASH_SCREEN} from '../constatns/screens';
 
 const initialRoute = {
-    route: SPLASH_SCREEN
+    route: SPLASH_SCREEN,
+    downloading: false,
 };
 
 const router = (state = initialRoute, action) => {
@@ -26,6 +33,17 @@ const router = (state = initialRoute, action) => {
             return {
                 ...state,
                 route: action.route
+            };
+
+        case START_DOWNLOADING:
+            return {
+                ...state,
+                downloading: true,
+            };
+        case STOP_DOWNLOADING:
+            return {
+                ...state,
+                downloading: false,
             };
         default:
             return state;
