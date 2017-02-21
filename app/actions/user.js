@@ -2,6 +2,7 @@
 
 import {UPDATE_USER_ACITON} from '../constatns/user';
 import {startDownloading, stopDownloading} from './router';
+import {AlertIOS} from 'react-native';
 
 import {fetchUser} from '../core/network/user';
 
@@ -21,11 +22,11 @@ export const fetchUserData = accessToken => {
 };
 
 const successFetch = dispatch => user => {
-    dispatch(updateUserAction(user));
     dispatch(stopDownloading());
+    dispatch(updateUserAction(user));
 };
 
-const failedFetch = (dispatch) => () => {
+const failedFetch = (dispatch) => error => {
     dispatch(stopDownloading());
-    console.log("Fetch failed");
+    AlertIOS.alert('User info downloading failed', error.message);
 };

@@ -22,7 +22,7 @@ export async function post(path, body) {
         body: body ? JSON.stringify(body) : null
     });
 
-    await sleep(5000);
+    // await sleep(5000);
 
     console.log(`POST: ${path}, status:${result.status}`);
     return result.json();

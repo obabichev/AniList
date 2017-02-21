@@ -1,7 +1,7 @@
 'use strict';
 
 import React, {Component, PropTypes} from 'react';
-import {View, Text, Image, StyleSheet} from 'react-native';
+import {View, Text, Image, ScrollView, RefreshControl, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {
     Container,
@@ -35,27 +35,36 @@ class Profile extends Component {
         }
     }
 
+    _refresh = () => {
+        this.props.fetchUserData(this.props.token);
+    };
+
     renderProfile = () => {
         if (this.props.user.id) {
-            return this.showProfile();
+            return <View>
+                <ProfileHeaderView
+                    style={styles.header}
+                    avatarImageUrl={this.props.user.image_url_lge}
+                    username={this.props.user.display_name}
+                />
+                <Text>ID:{this.props.user.id}</Text>
+            </View>
         }
     };
 
-    showProfile = () => (
-        <Content>
-            <ProfileHeaderView
-                style={styles.header}
-                avatarImageUrl={this.props.user.image_url_lge}
-                username={this.props.user.display_name}
-            />
-            <Text>ID:{this.props.user.id}</Text>
+    refreshControl = () => <RefreshControl
+        refreshing={this.props.downloading}
+        onRefresh={this._refresh}
+    />;
+
+    renderContent = () => (
+        <Content
+            refreshControl={this.refreshControl()}>
+            {this.renderProfile()}
         </Content>
     );
 
-    showDownloadingSpinner = () => this.props.downloading ? (<Spinner color='blue'/>) : null;
-
     render() {
-        console.log(`Pfofile: downloading: ${this.props.downloading}`);
         return (
             <Container>
                 <Header>
@@ -69,8 +78,7 @@ class Profile extends Component {
                     </Body>
                     <Right />
                 </Header>
-                {this.showDownloadingSpinner()}
-                {this.renderProfile()}
+                {this.renderContent()}
             </Container>
         );
     }
