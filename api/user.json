@@ -1,7 +1,7 @@
 {
   "id": 87666,
   "display_name": "obabichev",
-  "anime_time": 0,
+  "anime_time": 180,
   "manga_chap": 0,
   "about": "",
   "list_order": 0,
@@ -22,7 +22,7 @@
       "anime": {
         "watching": 0,
         "plan to watch": 0,
-        "completed": 1,
+        "completed": 2,
         "dropped": 0,
         "on-hold": 0
       },
@@ -44,7 +44,7 @@
         "60": 0,
         "70": 0,
         "80": 0,
-        "90": 0,
+        "90": 1,
         "100": 0,
         "260": 1
       },
@@ -62,17 +62,22 @@
       }
     },
     "favourite_genres": {
-      "Sci-Fi": 1,
+      "Action": 2,
+      "Comedy": 1,
       "Mecha": 1,
-      "Action": 1
+      "Sci-Fi": 1
     },
     "activity_history": {
       "2017-02-13": {
         "count": 1,
         "color": "#d6e685"
+      },
+      "2017-02-18": {
+        "count": 1,
+        "color": "#d6e685"
       }
     },
-    "activity_history_total": 183,
+    "activity_history_total": 189,
     "list_scores": {
       "anime": {
         "mean": 0,

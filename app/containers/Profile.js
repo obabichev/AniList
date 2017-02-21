@@ -8,14 +8,11 @@ import {
     Header,
     Title,
     Content,
-    Footer,
-    FooterTab,
     Button,
     Left,
     Right,
     Body,
     Icon,
-    Spinner
 } from 'native-base';
 
 import {openAnimeListScreen} from '../actions/router';
@@ -36,7 +33,7 @@ class Profile extends Component {
     }
 
     _refresh = () => {
-        this.props.fetchUserData(this.props.token);
+        this.props.fetchUserData();
     };
 
     renderProfile = () => {
@@ -58,26 +55,29 @@ class Profile extends Component {
     />;
 
     renderContent = () => (
-        <Content
-            refreshControl={this.refreshControl()}>
+        <Content refreshControl={this.refreshControl()}>
             {this.renderProfile()}
         </Content>
+    );
+
+    renderHeader = () => (
+        <Header>
+            <Left>
+                <Button transparent>
+                    <Icon name='menu'/>
+                </Button>
+            </Left>
+            <Body>
+            <Title>Profile</Title>
+            </Body>
+            <Right />
+        </Header>
     );
 
     render() {
         return (
             <Container>
-                <Header>
-                    <Left>
-                        <Button transparent>
-                            <Icon name='menu'/>
-                        </Button>
-                    </Left>
-                    <Body>
-                    <Title>Profile</Title>
-                    </Body>
-                    <Right />
-                </Header>
+                {this.renderHeader()}
                 {this.renderContent()}
             </Container>
         );
@@ -88,10 +88,6 @@ const styles = StyleSheet.create({
     container: {
         width: 300,
         height: 300,
-        // flex: 1,
-        // weight: 1,
-        // alignItems: 'center',
-        // justifyContent: 'center'
     },
     header: {
         width: 100,
@@ -100,7 +96,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    token: state.auth.tokens.access_token,
     user: state.user.user,
     downloading: state.router.downloading,
 });
@@ -108,7 +103,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => {
     return {
         openAnimeListScreen: () => dispatch(openAnimeListScreen()),
-        fetchUserData: token => dispatch(fetchUserData(token))
+        fetchUserData: token => dispatch(fetchUserData())
     };
 };
 

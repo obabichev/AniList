@@ -3,7 +3,7 @@
 import {Linking} from 'react-native';
 import {client} from '../settings/settings';
 import {post} from './rest/rest';
-
+import {store} from '../store';
 
 import {genUrl} from './urlUtil';
 
@@ -41,10 +41,7 @@ const accessTokenParams = code => ({
     redirect_uri: client.redirectUri,
     code: code
 });
-
-
 const createAccessTokenUrl = code => genUrl('/auth/access_token', accessTokenParams(code));
-
 export async function accessToken(code) {
     let accessTokenUrl = createAccessTokenUrl(code);
 
@@ -52,3 +49,19 @@ export async function accessToken(code) {
     return result;
 }
 
+
+const refreshTokensParams = refreshToken => ({
+    grant_type: 'refresh_token',
+    client_id: client.clientId,
+    client_secret: client.clientSecret,
+    refresh_token: refreshToken
+});
+const createRefreshTokenUrl = refreshToken => genUrl('/auth/access_token', refreshTokensParams(refreshToken));
+export async function refreshToken() {
+    let refreshToken = store.getState().auth.tokens.refresh_token;
+    let refreshTokenUrl = createRefreshTokenUrl(refreshToken);
+
+    let result = await post(refreshTokenUrl, null);
+    result.refresh_token = refreshToken;
+    return result;
+}
