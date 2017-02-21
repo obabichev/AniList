@@ -3,9 +3,9 @@
 import {Linking} from 'react-native';
 import {client} from '../settings/settings';
 import {post} from './rest/rest';
-import {store} from '../store';
 
 import {genUrl} from './urlUtil';
+import {getRefreshToken} from './tokenUtil';
 
 function authorizeViaWebForm(url, callback) {
     let handler = event => {
@@ -58,7 +58,7 @@ const refreshTokensParams = refreshToken => ({
 });
 const createRefreshTokenUrl = refreshToken => genUrl('/auth/access_token', refreshTokensParams(refreshToken));
 export async function refreshToken() {
-    let refreshToken = store.getState().auth.tokens.refresh_token;
+    let refreshToken = getRefreshToken();
     let refreshTokenUrl = createRefreshTokenUrl(refreshToken);
 
     let result = await post(refreshTokenUrl, null);

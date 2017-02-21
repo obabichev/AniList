@@ -3,7 +3,7 @@
 import {openProfileScreen, startDownloading, stopDownloading} from './router';
 import {authorize, accessToken, refreshToken} from '../core/network/auth';
 import {AUTH} from '../constatns/auth';
-import {isAccessTokenAlive} from '../core/store';
+import {isAccessTokenAlive} from '../core/network/tokenUtil';
 
 export const auth = (tokens) => ({
     type: AUTH,
@@ -30,8 +30,6 @@ export const login = accessToken => {
 
 export const refreshTokenAction = () => {
     if (isAccessTokenAlive()) {
-        // return new Promise((resolve, reject) => resolve());
-        // return Promise.resolve();
         return dispatch => {
         };
     }

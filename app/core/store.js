@@ -24,12 +24,3 @@ export const store = createStore(
 
 persistStore(store, persistingOptions, () => store.dispatch(openLaunchScreen()));
 
-export const isAccessTokenAlive = () => {
-    let tokens = store.getState().auth.tokens;
-    let expires = tokens.expires;
-
-    let current = new Date().getTime() / 1000;
-    let diff = expires - current;
-    return !(diff < 1000);
-};
-

@@ -2,7 +2,7 @@
 
 import {get} from './rest/rest';
 import {genUrl} from './urlUtil';
-import {store} from '../store';
+import {getAccessToken} from './tokenUtil';
 
 const fetchUserInfoParams = accessToken => ({
     access_token: accessToken,
@@ -10,7 +10,7 @@ const fetchUserInfoParams = accessToken => ({
 });
 
 export async function fetchUser() {
-    let accessToken = store.getState().auth.tokens.access_token;
+    let accessToken = getAccessToken();
     let result = await get(genUrl('/user', fetchUserInfoParams(accessToken)));
     return result;
 }
