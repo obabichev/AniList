@@ -5,39 +5,17 @@ import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon} from 'native-base';
 
-
-import {showAnimeList} from '../actions/anime';
-import AnimeListView from '../components/AnimeListView'
+import {openNavBar} from '../actions/router';
 
 class AnimeList extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        this.props.showAnimeList(this.props.user);
-    }
-
-    animeList = (animeList) => animeList.map(anime => <Text key={anime.series_title}>{anime.series_title}</Text>);
-
-    header = myinfo => {
-        if (myinfo) return <View>
-            <Text>Watching: {myinfo.user_watching}</Text>
-            <Text>Completed: {myinfo.user_completed}</Text>
-            <Text>Onhold: {myinfo.user_onhold}</Text>
-            <Text>Dropped: {myinfo.user_dropped}</Text>
-            <Text>Plan to watch: {myinfo.user_plantowatch}</Text>
-            <Text>Days spent watching: {myinfo.user_days_spent_watching}</Text>
-        </View>;
-    };
 
     render() {
         return (
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent>
+                        <Button transparent
+                                onPress={this.props.openNavBar}>
                             <Icon name='menu'/>
                         </Button>
                     </Left>
@@ -48,9 +26,9 @@ class AnimeList extends Component {
                 </Header>
 
                 <Content>
-                    {this.header(this.props.animeList.myinfo)}
-                    <View style={{height:30}}/>
-                    <AnimeListView anime={this.props.animeList.anime}/>
+                    <View>
+                        <Text>ANIME LIST</Text>
+                    </View>
                 </Content>
             </Container>
         );
@@ -65,12 +43,12 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    user: state.auth.user,
-    animeList: state.anime.animeList
+    // user: state.auth.user,
+    // animeList: state.anime.animeList
 });
 
 const mapDispatchToProps = dispatch => ({
-    showAnimeList: (user) => dispatch(showAnimeList(user))
+    openNavBar: () => dispatch(openNavBar())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnimeList);

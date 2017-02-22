@@ -15,7 +15,7 @@ import {
     Icon,
 } from 'native-base';
 
-import {openAnimeListScreen, openNavBar} from '../actions/router';
+import {openNavBar} from '../actions/router';
 import {fetchUserData} from '../actions/user';
 
 import ProfileHeaderView from '../components/profile/ProfileHeaderView';
