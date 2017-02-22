@@ -5,7 +5,9 @@ import {
     OPEN_PROFILE_SCREEN,
     OPEN_ANIME_LIST_SCREEN,
     START_DOWNLOADING,
-    STOP_DOWNLOADING
+    STOP_DOWNLOADING,
+    OPEN_NAV_BAR,
+    CLOSE_NAV_BAR
 } from '../constatns/router';
 import {LAUNCH_SCREEN, PROFILE_SCREEN, ANIME_LIST_SCREEN} from '../constatns/screens';
 
@@ -33,4 +35,12 @@ export const startDownloading = () => ({
 export const stopDownloading = () => ({
     type: STOP_DOWNLOADING,
     downloading: false
+});
+
+export const openNavBar = () => ({
+    type: OPEN_NAV_BAR
+});
+
+export const closeNavBar = () => ({
+    type: CLOSE_NAV_BAR
 });

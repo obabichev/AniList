@@ -5,13 +5,16 @@ import {
     OPEN_PROFILE_SCREEN,
     OPEN_ANIME_LIST_SCREEN,
     START_DOWNLOADING,
-    STOP_DOWNLOADING
+    STOP_DOWNLOADING,
+    OPEN_NAV_BAR,
+    CLOSE_NAV_BAR
 } from '../constatns/router';
 import {SPLASH_SCREEN} from '../constatns/screens';
 
 const initialRoute = {
     route: SPLASH_SCREEN,
     downloading: false,
+    openNavBar: false
 };
 
 const router = (state = initialRoute, action) => {
@@ -44,6 +47,16 @@ const router = (state = initialRoute, action) => {
             return {
                 ...state,
                 downloading: false,
+            };
+        case OPEN_NAV_BAR:
+            return {
+                ...state,
+                openNavBar: true,
+            };
+        case CLOSE_NAV_BAR:
+            return {
+                ...state,
+                openNavBar: false,
             };
         default:
             return state;

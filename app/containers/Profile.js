@@ -15,7 +15,7 @@ import {
     Icon,
 } from 'native-base';
 
-import {openAnimeListScreen} from '../actions/router';
+import {openAnimeListScreen, openNavBar} from '../actions/router';
 import {fetchUserData} from '../actions/user';
 
 import ProfileHeaderView from '../components/profile/ProfileHeaderView';
@@ -63,7 +63,8 @@ class Profile extends Component {
     renderHeader = () => (
         <Header>
             <Left>
-                <Button transparent>
+                <Button transparent
+                onPress={this.props.openNavBar}>
                     <Icon name='menu'/>
                 </Button>
             </Left>
@@ -102,8 +103,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        openAnimeListScreen: () => dispatch(openAnimeListScreen()),
-        fetchUserData: token => dispatch(fetchUserData())
+        fetchUserData: token => dispatch(fetchUserData()),
+        openNavBar: () => dispatch(openNavBar())
     };
 };
 
