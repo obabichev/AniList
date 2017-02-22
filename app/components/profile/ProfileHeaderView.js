@@ -8,9 +8,11 @@ class ProfileHeaderView extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <View style={styles.nameContainer}>
+                    <Text style={styles.title}>{this.props.username}</Text>
+                </View>
                 <Image style={styles.avatar}
                        source={{uri: this.props.avatarImageUrl}}/>
-                <Text style={styles.title}>{this.props.username}</Text>
             </View>
         );
     }
@@ -21,6 +23,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#02a9ff',
         height: 150,
         // justifyContent: 'bot',
+    },
+    nameContainer: {
+        backgroundColor: '#0c597b',
+        height: 36,
+        // flex:1,
+        // flexDirection:'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     avatar: {
         position: 'absolute',
