@@ -39,11 +39,7 @@ class Profile extends Component {
     renderProfile = () => {
         if (this.props.user.id) {
             return <View>
-                <ProfileHeaderView
-                    style={styles.header}
-                    avatarImageUrl={this.props.user.image_url_lge}
-                    username={this.props.user.display_name}
-                />
+                <ProfileHeaderView/>
                 <Text>ID:{this.props.user.id}</Text>
             </View>
         }

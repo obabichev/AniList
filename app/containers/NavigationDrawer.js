@@ -18,7 +18,6 @@ class NavigationDrawer extends Component {
             <Drawer
                 open={this.props.openNavBar}
                 acceptPan={true}
-                ref={(ref) => this._drawer = ref}
                 onClose={this.onClose}
                 children={this.props.children}
                 content={<SideBar/>}

@@ -3,6 +3,9 @@
 import React, {Component} from 'react';
 import {View, Text, Image, StyleSheet} from 'react-native';
 
+import color from '../../core/settings/color';
+import {connect} from 'react-redux';
+
 class ProfileHeaderView extends Component {
 
     render() {
@@ -20,15 +23,15 @@ class ProfileHeaderView extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#02a9ff',
+        backgroundColor: color.PRIMARY_COLOR,
         height: 150,
-        // justifyContent: 'bot',
+        flexDirection: 'row',
+        alignItems: 'flex-end'
     },
     nameContainer: {
-        backgroundColor: '#0c597b',
+        backgroundColor: color.PRIMARY_COLOR_DARK,
         height: 36,
-        // flex:1,
-        // flexDirection:'row',
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -52,4 +55,9 @@ ProfileHeaderView.propTypes = {
     username: React.PropTypes.string
 };
 
-export default ProfileHeaderView;
+const mapStateToProps = state => ({
+    avatarImageUrl: state.user.user.image_url_lge,
+    username: state.user.user.display_name
+});
+
+export default connect(mapStateToProps)(ProfileHeaderView);
