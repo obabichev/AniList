@@ -5,7 +5,7 @@ export async function get(path) {
     let result = await fetch(path, {
         method: 'GET'
     });
-    await sleep(5000);
+    await sleep(1000);
 
     console.log(`GET: ${path}, status:${result.status}`);
 

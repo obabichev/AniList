@@ -93,7 +93,7 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>oauth2example</string>
+          <string>oauth2anilist</string>
         </array>
       </dict>
     </array>
