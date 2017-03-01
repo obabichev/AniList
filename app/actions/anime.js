@@ -1,26 +1,32 @@
 'use strict';
 
-import {SHOW_ANIME_LIST} from '../constatns/anime';
-import {fetchAnimeList} from '../network/anime';
+import {FETCH_ANIME_LIST_ACTION} from '../constatns/anime';
+import {fetchAnimeList} from '../core/network/anime';
+import {startDownloading, stopDownloading} from './router';
+import {refreshTokenAction} from './auth';
 
-const show = animeList => ({
-    type: SHOW_ANIME_LIST,
-    animeList: animeList
+const updateAnimeListAction = animeLists => ({
+    type: FETCH_ANIME_LIST_ACTION,
+    animeLists: animeLists
 });
 
-export const showAnimeList = (user) => {
+export const uploadAnimeListAction = userId => {
     return dispatch => {
-        //todo network request
-
-
-        let list = [
-            {series_title: 'title 1'},
-            {series_title: 'title 2'}
-        ];
-
-        fetchAnimeList(user).then(
-            animeList => dispatch(show(animeList)),
-            e => console.log(`Error: ${e.message}`)
-        );
+        return dispatch(asyncStartDownloading())
+            .then(() => dispatch(refreshTokenAction()))
+            .then(() => dispatch(fetchAnimeListAction(userId)))
+            .then(() => dispatch(stopDownloading()));
     }
+};
+
+//todo duplicate code from actions/user.js !fix it
+const asyncStartDownloading = () => {
+    return dispatch => Promise.resolve().then(dispatch(startDownloading()));
+};
+
+const fetchAnimeListAction = userId => {
+    return dispatch => fetchAnimeList(userId).then(
+        animeLists => dispatch(updateAnimeListAction(animeLists)),
+        error => AlertIOS.alert('Anime list downloading failed', error.message)
+    );
 };

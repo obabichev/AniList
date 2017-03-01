@@ -3,11 +3,33 @@
 import React, {Component, PropTypes} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
-import {Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon} from 'native-base';
+import {
+    Container,
+    Header,
+    Title,
+    Content,
+    Button,
+    Left,
+    Right,
+    Body,
+    Icon,
+    List,
+    ListItem,
+    Thumbnail
+} from 'native-base';
 
 import {openNavBar} from '../actions/router';
+import {uploadAnimeListAction} from '../actions/anime';
 
 class AnimeList extends Component {
+
+    componentDidMount() {
+        if (this.props.user.id) {
+            if (this.props.animeLists.length == 0) {
+                this.props.fetchAnimeList(this.props.user.id);
+            }
+        }
+    }
 
     render() {
         return (
@@ -26,13 +48,26 @@ class AnimeList extends Component {
                 </Header>
 
                 <Content>
-                    <View>
-                        <Text>ANIME LIST</Text>
-                    </View>
+                    <List dataArray={this.props.animeLists.completed} renderRow={this.renderAnimeRow}/>
                 </Content>
             </Container>
         );
     }
+
+    renderAnimeRow = animeItem => <ListItem thumbnail>
+        <Left>
+            <Thumbnail square size={80} source={{uri: animeItem.anime.image_url_med}}/>
+        </Left>
+        <Body>
+        <Text>{animeItem.anime.title_english}</Text>
+        <Text note>{animeItem.anime.title_romaji}</Text>
+        </Body>
+        <Right>
+            <Button transparent>
+                <Text>View</Text>
+            </Button>
+        </Right>
+    </ListItem>;
 }
 
 const styles = StyleSheet.create({
@@ -43,12 +78,13 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    // user: state.auth.user,
-    // animeList: state.anime.animeList
+    user: state.user.user,
+    animeLists: state.anime.animeLists
 });
 
 const mapDispatchToProps = dispatch => ({
-    openNavBar: () => dispatch(openNavBar())
+    openNavBar: () => dispatch(openNavBar()),
+    fetchAnimeList: userId => dispatch(uploadAnimeListAction(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AnimeList);

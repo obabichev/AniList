@@ -1,3 +1,3 @@
 'use strict';
 
-export const SHOW_ANIME_LIST = 'SHOW_ANIME_LIST';
+export const FETCH_ANIME_LIST_ACTION = 'FETCH_ANIME_LIST_ACTION';

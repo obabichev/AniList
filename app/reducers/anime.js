@@ -1,19 +1,18 @@
 'use strict';
 
-import {SHOW_ANIME_LIST} from '../constatns/anime';
+import {FETCH_ANIME_LIST_ACTION} from '../constatns/anime';
 
 const initialRoute = {
-    animeList: {
-        anime:[]
-    }
+    animeLists: []
 };
 
 const anime = (state = initialRoute, action) => {
     switch (action.type) {
-        case SHOW_ANIME_LIST:
+        case FETCH_ANIME_LIST_ACTION:
+            console.log(action.animeLists);
             return {
                 ...state,
-                animeList: action.animeList
+                animeLists: action.animeLists
             };
         default:
             return state;

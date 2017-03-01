@@ -1,8 +1,9 @@
 'use strict';
 
 import React, {Component} from 'react';
-import {View, StyleSheet, Button, TouchableHighlight} from 'react-native';
+import {View, StyleSheet, TouchableHighlight} from 'react-native';
 import {connect} from 'react-redux';
+import {Button, Text, StyleProvider} from 'native-base';
 
 import color from '../../core/settings/color';
 import ProfileHeaderView from '../profile/ProfileHeaderView';
@@ -22,11 +23,11 @@ class SideBar extends Component {
                     </View>
                 </TouchableHighlight>
                 {this.delimeter()}
-                <Button
-                    onPress={this.props.openAnimeListScreen}
-                    title="Anime list"
-                    color="white"
-                />
+                <Button block
+                        onPress={this.props.openAnimeListScreen}
+                        color={color.PRIMARY_COLOR_DARK}>
+                    <Text>Anime list</Text>
+                </Button>
                 {this.delimeter()}
             </View>
         );
